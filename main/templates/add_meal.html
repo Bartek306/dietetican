@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pl">
+   <head>
+      {% load static %}
+      <meta charset="UTF-8">
+      <title>Dietetyk - Dodanie posiłku do diety</title>
+      <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+      <link href="images/favicon.ico" rel="icon">
+      <link href="https://fonts.googleapis.com/css?family=Nunito|Pacifico" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+   </head>
+   <body>
+      <header class="header">
+         <nav class="main-menu" style= "padding-top: 25px;">
+            <a href="index.html"><img src="{% static "images/logo.png" %}" style="height:80px; padding-left:155px; margin-bottom: 20px"></a>
+            <a href="{% url 'login' %}" style= "float: right; padding-top: 35px; padding-right: 155px">Wyloguj się</a>
+         </nav>
+      </header>
+
+      <section class="tabele container2">
+         <h2>Dodaj posiłek do diety</h2>
+         <br>
+         <ul>
+            <li>
+               <table class ="dodanie_posilku">
+                  <tr>
+                     <th>Składniki</th>
+                  </tr>
+                  <tr>
+                     <td>
+
+                        <form style="text-align: center;margin-left: auto;margin-right: auto;">
+                           <input type="text" id="skladnik1" name="skladnik1" value="Przykładowy składnik 1" size="30">
+                           <input type="text" id="ilosc1" name="ilosc1" value="ilość" size="10">
+                           <input type="text" id="wartosc1" name="wartosc1" value="gr" size="10">
+                        </form>
+               </td>
+                  </tr>
+                  <tr>
+                     <td><form style="text-align: center;margin-left: auto;margin-right: auto;">
+                           <input type="text" id="skladnik2" name="skladnik1" value="Przykładowy składnik 1" size="30">
+                           <input type="text" id="ilosc2" name="ilosc2" value="ilość" size="10">
+                           <input type="text" id="wartosc2" name="wartosc2" value="gr" size="10">
+                        </form></td>
+                  </tr>
+                  <tr>
+                     <td><form style="text-align: center;margin-left: auto;margin-right: auto;">
+                           <input type="text" id="skladnik3" name="skladnik3" value="Przykładowy składnik 1" size="30">
+                           <input type="text" id="ilosc3" name="ilosc3" value="ilość" size="10">
+                           <input type="text" id="wartosc3" name="wartosc3" value="gr" size="10">
+                        </form></td>
+                  </tr>
+
+                  <th>
+                     <a href="index.html"><img src="{% static "images/add.png" %}" style="height:40px;padding-top:20px"></a>
+                  </th>
+               </table>
+            </li>
+            <li>
+               <table class ="dodanie_posilku">
+                  <tr>
+                     <th>Przepis</th>
+                  </tr>
+                  <tr>
+                  <td><form style="text-align: center;margin-left: auto;margin-right: auto;">
+                           <input style="height:200px" type="text" id="skladnik3" name="skladnik3" value="Wlać, zrobić, dodać..." size="70" >
+                        </form></td>
+                     </tr>
+               </table>
+            </li>
+         </ul>
+         <br> <br>
+
+         <a href="podglad_klienta.html" style= "text-align:center;color: darkblue;">
+                        <h9>Zapisz posiłek</h9>
+                     </a>
+
+
+      </section>
+
+      <footer class="contact container">
+      </footer>
+   </body>
+</html>

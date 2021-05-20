@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl">
+   <head>
+      {% load static %}
+      <meta charset="UTF-8">
+      <title>Dietetyk - Dodanie klienta do listy podopiecznych</title>
+      <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+      <link href="images/favicon.ico" rel="icon">
+      <link href="https://fonts.googleapis.com/css?family=Nunito|Pacifico" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+   </head>
+   <body>
+      <header class="header">
+         <nav class="main-menu" style= "padding-top: 25px;">
+            <a href="index.html"><img src="{% static "images/logo.png" %}" style="height:80px; padding-left:155px; margin-bottom: 20px"></a>
+            <a href="{% url 'login' %}" style= "float: right; padding-top: 35px; padding-right: 155px">Wyloguj się</a>
+         </nav>
+      </header>
+
+      <section class="tabele" style="text-align: center;margin-left: auto;margin-right: auto; margin-top: 100px">
+         <h2>Dodaj klienta do listy podopiecznych</h2>
+         <br>
+         <ul >
+               <table class ="dodanie_klienta" style="text-align: center; margin-left: auto; margin-right: auto;">
+                  <tr>
+                     <th>Wprowadź e-mail klienta</th>
+                  </tr>
+                  <tr>
+                     <td>
+
+                        <form style="text-align: center;margin-left: auto;margin-right: auto;">
+                           <input type="text" id="email" name="email" value="" size="30">
+                           
+                        </form>
+                    </td>
+                </tr>               
+               </table>
+         </ul>
+
+         <a href="url '{% url 'home' %}" style= "text-align:center;color: darkblue;">
+                        <h2>Dodaj klienta</h2>
+                     </a>
+
+
+      </section>
+
+      <footer class="contact container">
+      </footer>
+   </body>
+</html>
