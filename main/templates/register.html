@@ -17,13 +17,18 @@
 	</div>
 
 	<div style="text-align: center;">
-		<a href="index.html"><img src="{% static "images/logo.png" %}" style="height:80px; text-align: center;margin-left:auto; margin-right: auto;  margin-bottom: 20px"></a>
+		<a href="{% url 'home' %}"><img src="{% static "images/logo.png" %}" style="height:80px; text-align: center;margin-left:auto; margin-right: auto;  margin-bottom: 20px"></a>
 		<ul style="list-style-type:none;">
 			<li><div style="text-align: center; padding-bottom:20px; font-size: 20px; color: grey; margin-left:auto; margin-right: auto; ">Zarejestruj się</div></li>
-			<li><input type="text" placeholder="Login" name="uname" required></li>
-			<li><input type="text" placeholder="e-mail" name="uname" required></li>
-			<li><input type="text" placeholder="Hasło" name="uname" required></li>
+			<form method="POST">
+			<li><input type="text" placeholder="Login" name="username" required></li>
+			<li><input type="text" placeholder="e-mail" name="e-mail" required></li>
+			<li><input type="password" placeholder="Hasło" name="password" required></li>
 			<button>OK</button>
+			{% if flag %}
+			<p>{{message}}</p>
+			{% endif%}
+			</form>
 
 		</ul>
 

@@ -1,16 +1,55 @@
 from django.shortcuts import render, redirect
-
+from django.contrib.auth.models import User
 # Create your views here.
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate, get_user_model, login as auth_login, logout as django_logout
 
+# testtest12
+@csrf_exempt
 def login(request):
-	return render(request, "login.html")
+	flag = False
+	message = ""
+	if request.user.is_authenticated:
+		return redirect('home')
+	if request.method == "POST":
+		username = request.POST.get('username', False)
+		password = request.POST.get('password', False)
+		user = authenticate(username=username, password=password)
+		if user is not None:
+			auth_login(request, user)
+			return redirect('home')
+		message = "Podane dane są nieprawidłowe"
+		flag = True
+	return render(request, "login.html", {'flag': flag, 'message': message})
 
+@csrf_exempt
 def register(request):
-	return render(request, "register.html")
+	flag = False
+	message = ""
+	if request.method == "POST":
+		username = request.POST.get('username', False)
+		password = request.POST.get('password', False)
+		email = request.POST.get('e-mail', False)
+		if len(password) < 8:
+			flag = True
+			message = "Hasło powinno mieć conajmniej 8 znaków"
+		elif User.objects.filter(username=username).exists():
+		 	flag = True
+		 	message = "Użytkownik o takiej nazwie istnieje"
+		elif User.objects.filter(email=email).exists():
+		 	flag = True
+		 	message = "Użytkownik o takim adresie e-mail istnieje"
+		else:
+			user = User.objects.create_user(username, email, password)
+			user.save()
+			return redirect('login')
+	print(flag)
+	return render(request, "register.html", {'flag': flag, 'message':message})
 
 def logout(request):
-	return render(request, "login.html")
-
+	django_logout(request)
+	return redirect('/login')
+	
 def client(request):
 	return render(request, "client.html")
 
@@ -18,6 +57,8 @@ def add_client(request):
 	return render(request, "add_client.html")
 
 def home(request):
+	if not request.user.is_authenticated:
+		return redirect('login')
 	return render(request, "home.html")
 
 def add_meal(request):
