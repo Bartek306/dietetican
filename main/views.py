@@ -3,8 +3,12 @@ from django.contrib.auth.models import User
 # Create your views here.
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, get_user_model, login as auth_login, logout as django_logout
+from django.contrib.auth import get_user_model
+from .models import Diet, Ingredient, Meal
 
-# testtest12
+# user: test passw:testtest12
+User = get_user_model()
+
 @csrf_exempt
 def login(request):
 	flag = False
@@ -68,4 +72,27 @@ def no_assigment(request):
 	return render(request, "no_assigment.html")
 
 def client_view(request):
-	return render(request, "client_view.html")
+	username = request.user.id
+	#diet = Diet.objects.filter(owner=username )
+	try:
+		diet = Diet.objects.get(owner=username)
+		meals = diet.meals.all()
+	except:
+		diet = None
+		meals = None
+	ingradients = []
+	lst = ""
+	if meals:
+		for meal in meals:
+			for ingr in meal.ingredients.all():
+				lst += str(ingr) +  " "
+			ingradients.append(lst)
+			lst = ""
+		my_list = zip(meals, ingradients)
+	else:
+		my_list = None
+	return render(request, "client_view.html", {"my_list": my_list})
+
+def make_nicer(ingr):
+	print(ingr)
+	pass	

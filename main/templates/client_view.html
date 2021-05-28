@@ -22,27 +22,23 @@
          <br>
          <ul>
 
+            {% if my_list %}
             <li>
                <h2>Aktualna dieta</h2>
                <table class ="table1">
+                  {% for meal, ingredient in my_list %}
                   <tr>
-                     <td>Śniadanie: Fasolka, Marchewka, Fasolka</td>
+                     <td>{{ meal.name }} = {{ ingredient }}
+                     </td>
                   </tr>
-                  <tr>
-                     <td>Obiad: Fasolka, Marchewka, Fasolka</td>
-                  </tr>
-                  <tr>
-                     <td>Kolacja: Fasolka, Marchewka, Fasolka</td>
-                  </tr>
-                  <tr>
-                     <td>Przekąska: Śniadanie: Fasolka, Marchewka</td>
-                  </tr>
+                  {% endfor %}
                   <th>
                      <a href="{% url 'add_meal' %}" style= "text-align:center;   color: darkblue;">
                         <h9>        </h9>
                      </a>
                   </th>
                </table>
+               {% endif %}
             </li>
             <li>
 
