@@ -10,7 +10,7 @@ class Ingredient(models.Model):
 	amount = models.IntegerField()
 
 	def __str__(self):
-		return self.name + " " + str(self.amount) +  " [" + self.unit + "]"
+		return self.name + " [" + str(self.amount) +" " + self.unit + "]"
 
 
 

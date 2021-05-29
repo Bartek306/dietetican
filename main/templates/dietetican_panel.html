@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pl">
+   <head>
+      {% load static %}
+      <meta charset="UTF-8">
+      <title>Dietetyk - wybór klienta</title>
+      <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+      <link href="images/favicon.ico" rel="icon">
+      <link href="https://fonts.googleapis.com/css?family=Nunito|Pacifico" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+   </head>
+   <body>
+      <header class="header">
+         <nav class="main-menu" style= "padding-top: 25px;">
+            <a href="{% url 'home' %}"><img src="{% static "images/logo.png" %}" style="height:80px; padding-left:155px; margin-bottom: 20px"></a>
+            <a href="{% url 'logout' %}" style= "float: right; padding-top: 35px; padding-right: 155px">Wyloguj się</a>
+         </nav>
+      </header>
+
+      <section class="tabele container">
+         <h2>Wybierz klienta do zarządzania</h2>
+         <br>
+        
+         <table class= "wybor_klienta">
+            <tr>
+               <td><a href="{% url 'client' %}" style= "text-align:center;color: darkblue;">
+                        <h9> Mariusz Gołębiewski</h9>
+                     </a></td>
+            </tr>
+            <tr>
+               <td>Mikołaj Imbor</td>
+            </tr>
+            <tr>
+               <td>Mateusz Majewski</td>
+            </tr>
+            <tr>
+               <td>Bartosz Maluszczak</td>
+            </tr>
+            <tr>
+               <td>Karol Szczechowicz</td>
+            </tr>
+         </table><br><br>
+
+
+ <a href="{% url 'add_client' %}" style="text-align:center;color: darkblue;"> <h9> DODAJ KLIENTA</h9></a>
+
+
+
+
+                
+
+         
+         
+      </section>
+      <footer class="contact container">
+      </footer>
+   </body>
+</html>
