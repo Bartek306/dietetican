@@ -12,7 +12,7 @@
    <body>
       <header class="header">
          <nav class="main-menu" style= "padding-top: 25px;">
-            <a href="index.html"><img src="{% static "images/logo.png" %}" style="height:80px; padding-left:155px; margin-bottom: 20px"></a>
+            <a href="{% url 'home'%}"><img src="{% static "images/logo.png" %}" style="height:80px; padding-left:155px; margin-bottom: 20px"></a>
             <a href="{% url 'login' %}" style= "float: right; padding-top: 35px; padding-right: 155px">Wyloguj się</a>
          </nav>
       </header>
@@ -70,11 +70,13 @@
             </li>
          </ul>
          <br> <br>
-
-         <a href="podglad_klienta.html" style= "text-align:center;color: darkblue;">
+         <form method="POST">
+         <a href="{% url 'panel' %}" style= "text-align:center;color: darkblue;">
                         <h9>Zapisz posiłek</h9>
-                     </a>
+                         <button>OK</button>
 
+                     </a>
+         </form>
 
       </section>
 

@@ -89,10 +89,20 @@ def add_client(request):
 
 @allowed_users(allowed_roles=['Dietitians'])
 def dietetican_panel(request):
-	return render(request, "dietetican_panel.html")
+	t = User.objects.all().filter(groups__name="Clients")
+	return render(request, "dietetican_panel.html", {"users": t})
 
-@unauthenticated_user
+@csrf_exempt
+@allowed_users(allowed_roles=['Dietitians'])
 def add_meal(request):
+	if request.method == "POST":
+		name1 = request.POST.get('skladnik1', False)
+		unit1 = request.POST.get('wartosc1', False)
+		amount1 = request.POST.get("ilosc1", False)
+		print(name1, unit1, amount1)
+		return redirect('dietetican_panel')
+	else:
+		print("kutas")
 	return render(request, "add_meal.html")
 
 @unauthenticated_user

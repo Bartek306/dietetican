@@ -22,23 +22,13 @@
          <br>
         
          <table class= "wybor_klienta">
+            {% for user in users %}
             <tr>
                <td><a href="{% url 'client' %}" style= "text-align:center;color: darkblue;">
-                        <h9> Mariusz Gołębiewski</h9>
-                     </a></td>
+                   <h9>{{ user }}</h9>
+               </a></td>
             </tr>
-            <tr>
-               <td>Mikołaj Imbor</td>
-            </tr>
-            <tr>
-               <td>Mateusz Majewski</td>
-            </tr>
-            <tr>
-               <td>Bartosz Maluszczak</td>
-            </tr>
-            <tr>
-               <td>Karol Szczechowicz</td>
-            </tr>
+            {% endfor %}
          </table><br><br>
 
 
