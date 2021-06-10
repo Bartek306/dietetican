@@ -9,3 +9,8 @@ Instrukcja jak odpalić projekt:
 Panel administratora:
 username: admin
 hasło: admin
+
+
+Tworzenie nowego dietetyka:
+
+manage.py add_dietetican name email password
