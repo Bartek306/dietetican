@@ -29,19 +29,21 @@
                   <tr>
                      <td>
 
-                        <form style="text-align: center;margin-left: auto;margin-right: auto;">
-                           <input type="text" id="email" name="email" value="" size="30">
-                           
+                        <form method = "POST" style ="text-align: center;margin-left: auto;margin-right: auto;">
+                           <input type="text" id="email" name="email" value="" size="30" required>
+                           <button>ELo</button>
                         </form>
                     </td>
                 </tr>               
                </table>
+              
          </ul>
+          {% if flag %}
+               <p>Brak klienta o podanym mailu</p>
+               {% endif%}
+         <form method='post'>
 
-         <a href="url '{% url 'home' %}" style= "text-align:center;color: darkblue;">
-                        <h2>Dodaj klienta</h2>
-                     </a>
-
+         </form>
 
       </section>
 

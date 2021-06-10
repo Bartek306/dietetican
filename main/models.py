@@ -15,12 +15,14 @@ class Ingredient(models.Model):
 
 
 class Meal(models.Model):
-	name = models.CharField(max_length=25)
+	name = models.CharField(max_length=25, null=True)
 	recipe = models.CharField(max_length=250)
 	ingredients = models.ManyToManyField(Ingredient, blank=True, related_name="Ingredients")
 
 
 class Diet(models.Model):
+	name = models.CharField(max_length=40, null=True)
+	active = models.BooleanField(default=False)
 	owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner", null=True)
 	meals = models.ManyToManyField(Meal, blank=True, related_name="Meals") 
 

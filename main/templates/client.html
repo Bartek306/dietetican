@@ -14,57 +14,46 @@
       <header class="header">
          <nav class="main-menu" style= "padding-top: 25px;">
             <a href="{% url 'home' %}"><img src="{% static "images/logo.png" %}" style="height:80px; padding-left:155px; margin-bottom: 20px"></a>
-            <a href="logowanie.html" style= "float: right; padding-top: 35px; padding-right: 155px">Wyloguj się</a>
+            <a href="{% url 'logout' %}" style= "float: right; padding-top: 35px; padding-right: 155px">Wyloguj się</a>
          </nav>
       </header>
 
       <section class="tabele container_podglad">
-         <h2>Podgląd klienta: Mariusz Gołębiewski</h2>
+         <h2>Podgląd użytkownika {{username}}</h2>
          <br>
          <ul>
+            {% if my_list %}
             <li>
                <table class ="table1">
-                  <tr>
-                     <th>Aktualna dieta </th>
-                  </tr>
-                  <tr>
-                     <td>Śniadanie: Fasolka, Marchewka, Fasolka</td>
-                  </tr>
-                  <tr>
-                     <td>Obiad: Fasolka, Marchewka, Fasolka</td>
-                  </tr>
-                  <tr>
-                     <td>Kolacja: Fasolka, Marchewka, Fasolka</td>
-                  </tr>
-                  <tr>
-                     <td>Przekąska: Śniadanie: Fasolka, Marchewka</td>
-                  </tr>
-                  <th>
+                     {% for meal, ingredient in my_list %}
+                     <td>{{ meal.name }} = {{ ingredient }}
+                        Przepis = {{meal.recipe}}
+                     </td>
+                     <br>
+
+                     {% endfor %}
+
                      <a href="{% url 'add_meal' %}" style= "text-align:center;   color: darkblue;">
                         <h9>Dodaj posiłek</h9>
                      </a>
                   </th>
                </table>
             </li>
+            {% else %}
+            <p>Użytkownik nie ma przypisanej żadnej diety</p>
+            {% endif %}
             <li>
                <table class ="table1">
                   <tr>
                      <th>Dostępne diety</th>
                   </tr>
+                  {% for name in names %}
                   <tr>
-                     <td>Dieta Wegańska</td>
+                     <td>{{name.name}}</td>
                   </tr>
-                  <tr>
-                     <td>Dieta "McŁowicz"</td>
-                  </tr>
-                  <tr>
-                     <td>Dieta "Dla Janusza"</td>
-                  </tr>
-                  <tr>
-                     <td>Dieta CSS</td>
-                  </tr>
+                  {% endfor %}
                   <th>
-                     <a href="index.html" style= "text-align:center;color: darkblue;">
+                     <a href="url 'home" style= "text-align:center;color: darkblue;">
                         <h9>Importuj dietę</h9>
                      </a>
                   </th>

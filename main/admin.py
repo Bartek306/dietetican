@@ -5,3 +5,5 @@ from .models import Ingredient, Meal, Diet
 admin.site.register(Ingredient)
 admin.site.register(Meal)
 admin.site.register(Diet)
+
+

@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 from .models import Diet, Ingredient, Meal
 from .decorators import unauthenticated_user, allowed_users
 # user: test passw:testtest12
+# deitetyk eloelo
 User = get_user_model()
 
 
@@ -15,7 +16,8 @@ def home(request):
 	username = request.user.id
 	#diet = Diet.objects.filter(owner=username )
 	try:
-		diet = Diet.objects.get(owner=username)
+		diet = Diet.objects.all().filter(owner=username)
+		diet = diet.filter(active=True)[0]
 		meals = diet.meals.all()
 	except:
 		diet = None
@@ -80,16 +82,57 @@ def logout(request):
 	return redirect('/login')
 
 @unauthenticated_user
-def client(request):
-	return render(request, "client.html")
+def client(request, username):
+	flag = False
+	t = User.objects.all().filter(id=username)
+	try:
+		diet = Diet.objects.all().filter(owner=username)
+		name = diet
+		if diet:
+			flag = True
+		diet = diet.filter(active=True)[0]
+		meals = diet.meals.all()
+	except:
+		diet = None
+		meals = None
+	ingradients = []
+	lst = ""
+	if meals:
+		for meal in meals:
+			for ingr in meal.ingredients.all():
+				lst += str(ingr) +  " "
+			ingradients.append(lst)
+			lst = ""
+		my_list = zip(meals, ingradients)
+	else:
+		my_list = None
 
-@unauthenticated_user
+	if diet is None and flag is False:
+		name = "Brak"
+
+	return render(request, "client.html", {"my_list": my_list,
+											"username": t[0],
+											"names": name})
+@csrf_exempt
+@allowed_users(allowed_roles=['Dietitians'])
 def add_client(request):
-	return render(request, "add_client.html")
+	flag = False
+	if request.method == "POST":
+		email = request.POST.get('email', False)
+		t = User.objects.all().filter(email=email).exists()
+		print(t)
+		if not t:
+			flag = True
+		else:
+			return redirect('panel')
+
+	return render(request, "add_client.html", {"flag": flag})
 
 @allowed_users(allowed_roles=['Dietitians'])
 def dietetican_panel(request):
-	t = User.objects.all().filter(groups__name="Clients")
+	username = request.user.username
+	group_name = "clients_" + username
+	t = User.objects.all().filter(groups__name=group_name)
 	return render(request, "dietetican_panel.html", {"users": t})
 
 @csrf_exempt
@@ -100,9 +143,7 @@ def add_meal(request):
 		unit1 = request.POST.get('wartosc1', False)
 		amount1 = request.POST.get("ilosc1", False)
 		print(name1, unit1, amount1)
-		return redirect('dietetican_panel')
-	else:
-		print("kutas")
+		return redirect('panel')
 	return render(request, "add_meal.html")
 
 @unauthenticated_user

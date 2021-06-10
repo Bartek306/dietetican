@@ -24,7 +24,7 @@
          <table class= "wybor_klienta">
             {% for user in users %}
             <tr>
-               <td><a href="{% url 'client' %}" style= "text-align:center;color: darkblue;">
+               <td><a href="{% url 'client' user.id %}" style= "text-align:center;color: darkblue;">
                    <h9>{{ user }}</h9>
                </a></td>
             </tr>
