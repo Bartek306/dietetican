@@ -18,13 +18,10 @@
       </header>
 
       <section class="tabele container_podglad">
-         <h2>Twoja dieta</h2>
-         <br>
          <ul>
-
             {% if my_list %}
             <li>
-               <h2>Aktualna dieta</h2>
+               <h2>Twoja dieta</h2>
                <table class ="table1">
                   
                   <tr>
@@ -45,10 +42,15 @@
                </table>
             {% else %}
                <p>Nie masz zadnych przypisanych diet</p>
+
+
+
+
+
             </li>
             {% endif %}
 
-            <li>
+          
 
                <h2>Konwersacja z dietetykiem</h2>
          <table class= "table2_klient">
@@ -75,7 +77,7 @@
                </td>
             </tr>
          </table>
-            </li>
+            
          </ul>
       </section>
       <section class="kontakt container">
