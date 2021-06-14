@@ -10,4 +10,5 @@ urlpatterns = [
 	path('add_meal', views.add_meal, name="add_meal"),
 	path('no_assigment', views.no_assigment, name="no_assigment"),
 	path('panel', views.dietetican_panel, name="panel"),
+	path('download_my_pdf', views.download_pdf)
 ]

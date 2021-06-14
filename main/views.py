@@ -1,4 +1,6 @@
 import mimetypes
+import os
+from wsgiref.util import FileWrapper
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -85,6 +87,16 @@ def home(request):
 
     return render(request, "home.html", {"my_list": my_list})
 
+
+def download_pdf(request):
+    fl_path = 'tescik.pdf'
+
+    fl = open(fl_path, 'rb')
+    wrapper = FileWrapper(fl)
+    mime_type, _ = mimetypes.guess_type(fl_path)
+    response = HttpResponse(wrapper, content_type=mime_type)
+    response['Content-Disposition'] = 'attachment; filename=%s' % 'dieta.pdf'
+    return response
 
 @csrf_exempt
 def login(request):
