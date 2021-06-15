@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, get_user_model, login as auth_login, logout as django_logout
 from django.contrib.auth import get_user_model
 from .models import Diet, Ingredient, Meal
+from django.contrib.auth.models import Group
 from .decorators import unauthenticated_user, allowed_users
 # user: test passw:testtest12
 # deitetyk eloelo
@@ -119,12 +120,22 @@ def add_client(request):
 	flag = False
 	if request.method == "POST":
 		email = request.POST.get('email', False)
-		t = User.objects.all().filter(email=email).exists()
+		t = User.objects.all().filter(email=email)
 		print(t)
-		if not t:
+		if not t.exists():
 			flag = True
 		else:
+			name = request.user.username
+			group_name = "clients_" + name
+			print(t)
+			group = Group.objects.get(name=group_name)
+			print(group)
+			t[0].groups.add(group)
+			group = Group.objects.get(name='Clients')
+			t[0].groups.add(group)
 			return redirect('panel')
+	
+
 
 	return render(request, "add_client.html", {"flag": flag})
 
