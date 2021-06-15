@@ -20,10 +20,9 @@
 
       <section class="tabele container_podglad">
          <h2>Podgląd użytkownika {{username}}</h2>
-         <br>
-         <ul>
+
+      
             {% if my_list %}
-            <li>
                <table class ="table1">
                      {% for meal, ingredient in my_list %}
                      <td>{{ meal.name }} = {{ ingredient }}
@@ -38,12 +37,11 @@
                      </a>
                   </th>
                </table>
-            </li>
+    
             {% else %}
-            <p>Użytkownik nie ma przypisanej żadnej diety</p>
+            <p style= "text-align:center;">Użytkownik nie ma przypisanej żadnej diety </p>
             {% endif %}
-            <li>
-               <table class ="table1">
+               <table class ="tableu1">
                   <tr>
                      <th>Dostępne diety</th>
                   </tr>
@@ -58,9 +56,10 @@
                      </a>
                   </th>
                </table>
-            </li>
-         </ul>
+       
       </section>
+
+
       <section class="kontakt container">
          <h2>Konwersacja z klientem</h2>
          <table class= "table2">

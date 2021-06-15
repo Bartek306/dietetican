@@ -84,8 +84,6 @@ table.table1 td {
   padding: 8px;
   font-size:17px;
   height: 50px;
-
-
 }
 
 table.table1 th {
@@ -93,6 +91,35 @@ table.table1 th {
   padding: 8px;
   padding-bottom:20px;
 }
+
+
+table.tableu1 {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+  min-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.tableu1 td {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+  font-size:17px;
+  height: 50px;
+
+
+}
+
+table.tableu1 th {
+  text-align: center;
+  padding: 8px;
+  padding-bottom:20px;
+}
+
+
+
 
 table.table2 {
   font-family: arial, sans-serif;
