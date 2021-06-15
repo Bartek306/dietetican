@@ -17,6 +17,29 @@ from fpdf import FPDF
 # user: test passw:testtest12
 # deitetyk eloelo
 
+def meal_list_creator(meals):
+    i = []
+    i_units = []
+    i_values = []
+
+    for meal in meals:
+        for ingr in meal.ingredients.all():
+            i.append(ingr.name)
+            i_units.append(ingr.unit)
+            i_values.append(ingr.amount)
+
+    dict_v = {}
+    dict_u = {}
+
+    for n in i:
+        dict_v[n] = 0
+
+    for n, v, u in zip(i, i_values, i_units):
+        dict_u[n] = u
+        dict_v[n] += v
+
+    return dict_v, dict_u
+
 
 class PDF(FPDF):
     def titles(self, txt):
@@ -36,6 +59,19 @@ class PDF(FPDF):
         self.set_font('sysfont', '', 16)
         self.set_text_color(220, 50, 50)
         self.cell(w=30.0, h=40.0, align='C', txt=txt, border=0)
+
+    def create_shopping_list(self, meals, filename):
+        self.add_font('sysfont', '', r"c:\WINDOWS\Fonts\arial.ttf", uni=True)
+        self.add_page()
+        self.titles("Lista zakupów")
+        dict_v, dict_u = meal_list_creator(meals)
+        arr = dict_v.keys()
+        value = 2
+        for name in arr:
+            self.texts(" - " + name + " " + str(dict_v[name]) + " " + str(dict_u[name]), value)
+            value += 1
+
+        self.output(filename)
 
     def create_pdf(self, meals, filename):
         self.add_font('sysfont', '', r"c:\WINDOWS\Fonts\arial.ttf", uni=True)
@@ -80,16 +116,18 @@ def home(request):
             ingradients.append(lst)
             lst = ""
         my_list = zip(meals, ingradients)
-        pdf = PDF()
-        pdf.create_pdf(meals, "tescik.pdf")
+        pdf1 = PDF()
+        pdf1.create_pdf(meals, "diet.pdf")
+        pdf2 = PDF()
+        pdf2.create_shopping_list(meals, "shopping_list.pdf")
     else:
         my_list = None
 
     return render(request, "home.html", {"my_list": my_list})
 
 
-def download_pdf(request):
-    fl_path = 'tescik.pdf'
+def download_diet(request):
+    fl_path = 'diet.pdf'
 
     fl = open(fl_path, 'rb')
     wrapper = FileWrapper(fl)
@@ -97,6 +135,18 @@ def download_pdf(request):
     response = HttpResponse(wrapper, content_type=mime_type)
     response['Content-Disposition'] = 'attachment; filename=%s' % 'dieta.pdf'
     return response
+
+
+def download_shopping_list(request):
+    fl_path = 'shopping_list.pdf'
+
+    fl = open(fl_path, 'rb')
+    wrapper = FileWrapper(fl)
+    mime_type, _ = mimetypes.guess_type(fl_path)
+    response = HttpResponse(wrapper, content_type=mime_type)
+    response['Content-Disposition'] = 'attachment; filename=%s' % 'lista_zakupow.pdf'
+    return response
+
 
 @csrf_exempt
 def login(request):
