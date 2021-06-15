@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
    <head>
+      {% load static %}
       <meta charset="UTF-8">
       <title>Dietetyk - Nie przypisano do dietetyka</title>
       <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
@@ -11,8 +12,8 @@
    <body>
       <header class="header">
          <nav class="main-menu" style= "padding-top: 25px;">
-            <a href="index.html"><img src="images/logo.png" style="height:80px; padding-left:155px; margin-bottom: 20px"></a>
-            <a href="logowanie.html" style= "float: right; padding-top: 35px; padding-right: 155px">Wyloguj się</a>
+            <a><img src="{% static "images/logo.png" %}" style="height:80px; padding-left:155px; margin-bottom: 20px"></a>
+            <a href="{% url 'logout' %}" style= "float: right; padding-top: 35px; padding-right: 155px">Wyloguj się</a>
          </nav>
       </header>
 

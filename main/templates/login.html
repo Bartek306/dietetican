@@ -2,12 +2,12 @@
 <html lang="pl">
    <head>
    	  {% load static %}
+
       <meta charset="UTF-8">
       <title>Dietetyk - Logowanie</title>
       <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
       <link href="images/favicon.ico" rel="icon">
       <link href="https://fonts.googleapis.com/css?family=Nunito|Pacifico" rel="stylesheet">
-      <link href="css/style.css" rel="stylesheet">
       <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
    </head>
@@ -28,15 +28,21 @@
 			<li>
 			<div style="text-align: center; padding-bottom:20px; font-size: 20px; color: grey; margin-left:auto; margin-right: auto; ">Zaloguj się</div>
 			</li>
-			<li><input type="text" placeholder="Login" name="uname" required></li>
-			<li><input type="text" placeholder="Hasło" name="uname" required></li>
+			<form method="POST">
+
+			<li><input type="text" placeholder="Login" name="username" required></li>
+			<li><input type="text" placeholder="Hasło" name="password" required></li>
 			<button>OK</button>
+
+			</form>
 			<li style="margin-top: 40px; font-size: 15px;">Nie masz konta?</li>
 			<a class="register" href="{% url 'register' %}">
 				<li>Zarejestruj się</li>
 		    </a>
 		</ul>
-
+			{% if flag %}
+			<p>{{message}}</p>
+			{% endif%}
 	</div>
 </body>
 </html>

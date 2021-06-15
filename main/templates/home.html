@@ -3,7 +3,7 @@
    <head>
       {% load static %}
       <meta charset="UTF-8">
-      <title>Dietetyk - wybór klienta</title>
+      <title>Dietetyk - widok klienta</title>
       <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
       <link href="images/favicon.ico" rel="icon">
       <link href="https://fonts.googleapis.com/css?family=Nunito|Pacifico" rel="stylesheet">
@@ -12,44 +12,73 @@
    <body>
       <header class="header">
          <nav class="main-menu" style= "padding-top: 25px;">
-            <a href="{% url 'home' %}"><img src="{% static "images/logo.png" %}" style="height:80px; padding-left:155px; margin-bottom: 20px"></a>
-            <a href="{% url 'login' %}" style= "float: right; padding-top: 35px; padding-right: 155px">Wyloguj się</a>
+            <a><img src="{% static "images/logo.png" %}" style="height:80px; padding-left:155px; margin-bottom: 20px"></a>
+            <a href="{% url 'logout' %}" style= "float: right; padding-top: 35px; padding-right: 155px">Wyloguj się</a>
          </nav>
       </header>
 
-      <section class="tabele container">
-         <h2>Wybierz klienta do zarządzania</h2>
+      <section class="tabele container_podglad">
+         <h2>Twoja dieta</h2>
          <br>
-        
-         <table class= "wybor_klienta">
+         <ul>
+
+            {% if my_list %}
+            <li>
+               <h2>Aktualna dieta</h2>
+               <table class ="table1">
+                  
+                  <tr>
+                     {% for meal, ingredient in my_list %}
+                     <td>{{ meal.name }} = {{ ingredient }}
+                        Przepis = {{meal.recipe}}
+                     </td>
+                     <br>
+
+                     {% endfor %}
+            
+                  </tr>
+                  <th>
+                     <a href="{% url 'add_meal' %}" style= "text-align:center;   color: darkblue;">
+                        <h9>        </h9>
+                     </a>
+                  </th>
+               </table>
+            {% else %}
+               <p>Nie masz zadnych przypisanych diet</p>
+            </li>
+            {% endif %}
+
+            <li>
+
+               <h2>Konwersacja z dietetykiem</h2>
+         <table class= "table2_klient">
+
             <tr>
-               <td><a href="{% url 'client' %}" style= "text-align:center;color: darkblue;">
-                        <h9> Mariusz Gołębiewski</h9>
-                     </a></td>
+               <td>Dzień dobry, czy mógłbym prosić o pomoc w sprawie mojej diety? </td>
             </tr>
             <tr>
-               <td>Mikołaj Imbor</td>
+               <td class= "odp">Dzień dobry Panie Mariuszu, jasne, że tak. W czym mogę pomóc? </td>
             </tr>
             <tr>
-               <td>Mateusz Majewski</td>
+               <td>Otóż chciałbym z niej zrezygnować :/</td>
             </tr>
+         </table>
+         <table class= "table3">
             <tr>
-               <td>Bartosz Maluszczak</td>
+               <td>
+                  <form>
+                     <input type="text" id="wiadomosc" name="wiadomosc"  placeholder="Wpisz wiadomość..." size="50">
+                  </form>
+               </td>
+               <td >
+                  <button>OK</button>
+               </td>
             </tr>
-            <tr>
-               <td>Karol Szczechowicz</td>
-            </tr>
-         </table><br><br>
-
-
- <a href="{% url 'add_client' %}" style="text-align:center;color: darkblue;"> <h9> DODAJ KLIENTA</h9></a>
-
-
-
-
-                
-
-         
+         </table>
+            </li>
+         </ul>
+      </section>
+      <section class="kontakt container">
          
       </section>
       <footer class="contact container">
