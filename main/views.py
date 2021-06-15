@@ -115,6 +115,7 @@ def client(request, username):
 											"username": t[0],
 											"names": name})
 @csrf_exempt
+@unauthenticated_user
 @allowed_users(allowed_roles=['Dietitians'])
 def add_client(request):
 	flag = False
@@ -138,7 +139,8 @@ def add_client(request):
 
 
 	return render(request, "add_client.html", {"flag": flag})
-
+	
+@unauthenticated_user
 @allowed_users(allowed_roles=['Dietitians'])
 def dietetican_panel(request):
 	username = request.user.username
